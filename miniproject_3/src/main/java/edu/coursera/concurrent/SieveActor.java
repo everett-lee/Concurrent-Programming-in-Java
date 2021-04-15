@@ -15,7 +15,7 @@ import static edu.rice.pcdp.PCDP.finish;
  * countPrimes to determine the number of primes <= limit.
  */
 public final class SieveActor extends Sieve {
-    static int MAX_LOCAL_PRIMES = 250;
+    static int MAX_LOCAL_PRIMES = 50;
 
     /**
      * {@inheritDoc}
@@ -59,7 +59,6 @@ public final class SieveActor extends Sieve {
     public static final class SieveActorActor extends Actor {
         SieveActorActor next = null;
         int count = 0;
-
         List<Integer> localPrimes = new ArrayList<>();
 
         /**
@@ -94,7 +93,7 @@ public final class SieveActor extends Sieve {
                 next = new SieveActorActor();
             }
 
-            next.process(candidate);
+            next.send(candidate);
         }
 
         private boolean isMultiple(int n) {
