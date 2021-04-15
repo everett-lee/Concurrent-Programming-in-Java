@@ -3,7 +3,6 @@ package edu.coursera.concurrent;
 import edu.rice.pcdp.Actor;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -16,6 +15,8 @@ import static edu.rice.pcdp.PCDP.finish;
  * countPrimes to determine the number of primes <= limit.
  */
 public final class SieveActor extends Sieve {
+    static int MAX_LOCAL_PRIMES = 250;
+
     /**
      * {@inheritDoc}
      *
@@ -57,7 +58,6 @@ public final class SieveActor extends Sieve {
      */
     public static final class SieveActorActor extends Actor {
         SieveActorActor next = null;
-        int MAX_LOCAL_PRIMES = 1000;
         int count = 0;
 
         List<Integer> localPrimes = new ArrayList<>();
