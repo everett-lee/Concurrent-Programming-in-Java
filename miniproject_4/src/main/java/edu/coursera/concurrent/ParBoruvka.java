@@ -45,8 +45,10 @@ public final class ParBoruvka extends AbstractBoruvka<ParBoruvka.ParComponent> {
 
             final Edge<ParComponent> edge = thisNode.getMinEdge();
             if (edge == null) {
-                solution.setSolution(thisNode);
-                isComplete.set(true);
+                if (!isComplete.get()) {
+                    solution.setSolution(thisNode);
+                    isComplete.set(true);
+                }
                 break;
             }
 
