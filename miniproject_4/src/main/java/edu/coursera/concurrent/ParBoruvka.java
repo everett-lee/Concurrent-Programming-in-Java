@@ -1,13 +1,12 @@
 package edu.coursera.concurrent;
 
-import edu.coursera.concurrent.boruvka.Edge;
 import edu.coursera.concurrent.boruvka.Component;
+import edu.coursera.concurrent.boruvka.Edge;
 
-import java.util.Queue;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -32,7 +31,7 @@ public final class ParBoruvka extends AbstractBoruvka<ParBoruvka.ParComponent> {
                                final SolutionToBoruvka<ParComponent> solution) {
 
         ParComponent thisNode = null;
-        while ((thisNode = nodesLoaded.poll()) != null) {
+        while (!isComplete.get() && (thisNode = nodesLoaded.poll()) != null) {
 
             if (thisNode == null || !(thisNode.lock.tryLock())) {
                 continue;
